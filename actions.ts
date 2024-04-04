@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import connect from "./db";
-import Advert from "./model/Advert";
+import Advert from "./src/app/model/Advert";
 import { IAdvert } from "./types/IAdvert";
 
 export async function getAllAdverts() {

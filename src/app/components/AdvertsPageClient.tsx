@@ -3,6 +3,7 @@
 import React, { useCallback, useState } from "react";
 import { useJsApiLoader, Libraries } from "@react-google-maps/api";
 import { Autocomplete, Map, ModalAddAdvert } from ".";
+import { useAppContext } from "../context";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -20,6 +21,12 @@ const AdvertsPageClient = () => {
     googleMapsApiKey: API_KEY as string,
     libraries,
   });
+
+  const { isAddAdvertModalOpen, setIsAddAdvertModalOpen } = useAppContext();
+
+  const handleModalToggle = () => {
+    setIsAddAdvertModalOpen(!isAddAdvertModalOpen);
+  };
 
   //   const onPlaceSelect = useCallback(
   //     (coordinates: { lat: number; lng: number }) => {
@@ -39,7 +46,9 @@ const AdvertsPageClient = () => {
             <Map center={center} />
             <div className="w-[400px] h-screen"></div>
           </div>
-          <ModalAddAdvert onClose={() => {}} />
+          {isAddAdvertModalOpen && (
+            <ModalAddAdvert onClose={handleModalToggle} />
+          )}
         </>
       ) : (
         <div className="w-screen h-screen flex items-center justify-center">
