@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { useJsApiLoader, Libraries } from "@react-google-maps/api";
-import { Autocomplete, Map } from ".";
+import { Autocomplete, Map, ModalAddAdvert } from ".";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -21,26 +21,32 @@ const AdvertsPageClient = () => {
     libraries,
   });
 
-  const onPlaceSelect = useCallback(
-    (coordinates: { lat: number; lng: number }) => {
-      setCenter(coordinates);
-    },
-    []
-  );
+  //   const onPlaceSelect = useCallback(
+  //     (coordinates: { lat: number; lng: number }) => {
+  //       setCenter(coordinates);
+  //     },
+  //     []
+  //   );
 
   return (
-    <div>
-      <div className="flex justify-center">
+    <>
+      {/* <div className="flex justify-center">
         <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} />
-      </div>
+      </div> */}
       {isLoaded ? (
-        <Map center={center} />
+        <>
+          <div className="flex">
+            <Map center={center} />
+            <div className="w-[400px] h-screen"></div>
+          </div>
+          <ModalAddAdvert onClose={() => {}} />
+        </>
       ) : (
         <div className="w-screen h-screen flex items-center justify-center">
           <h2>Loading...</h2>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

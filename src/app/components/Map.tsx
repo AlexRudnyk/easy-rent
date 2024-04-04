@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { GoogleMap } from "@react-google-maps/api";
-import { mapTheme } from './mapTheme';
+import { mapTheme } from "./mapTheme";
 
 interface IMapProps {
   center: { lat: number; lng: number };
@@ -18,7 +18,7 @@ const Map = ({ center }: IMapProps) => {
 
   const defaultOptions = {
     panControl: true,
-    zoomControl: true,
+    zoomControl: false,
     mapTypeControl: false,
     scaleControl: false,
     streetViewControl: false,
