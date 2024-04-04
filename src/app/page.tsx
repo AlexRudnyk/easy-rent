@@ -1,5 +1,9 @@
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+import { AdvertsPageClient } from "./components";
 
 export default function Home() {
-  return <main className="">Home</main>;
+  return (
+    <main className="">
+      <AdvertsPageClient />
+    </main>
+  );
 }
