@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useJsApiLoader, Libraries } from "@react-google-maps/api";
-import { Map } from ".";
+import { Autocomplete, Map } from ".";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -14,16 +14,27 @@ const defaultCenter = {
 const libraries: Libraries | undefined = ["places"];
 
 const AdvertsPageClient = () => {
+  const [center, setCenter] = useState(defaultCenter);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY as string,
     libraries,
   });
 
+  const onPlaceSelect = useCallback(
+    (coordinates: { lat: number; lng: number }) => {
+      setCenter(coordinates);
+    },
+    []
+  );
+
   return (
     <div>
+      <div>
+        <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} />
+      </div>
       {isLoaded ? (
-        <Map center={defaultCenter} />
+        <Map center={center} />
       ) : (
         <div className="w-screen h-screen flex items-center justify-center">
           <h2>Loading...</h2>
