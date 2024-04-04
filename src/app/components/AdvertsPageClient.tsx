@@ -30,7 +30,7 @@ const AdvertsPageClient = () => {
 
   return (
     <div>
-      <div>
+      <div className="flex justify-center">
         <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} />
       </div>
       {isLoaded ? (
