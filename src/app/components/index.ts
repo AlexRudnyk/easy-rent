@@ -4,6 +4,7 @@ import AdvertsPageClient from "./AdvertsPageClient";
 import Header from "./Header";
 import AddAdvertBtn from "./AddAdvertBtn";
 import ModalAddAdvert from "./ModalAddAdvert";
+import AddAdvertForm from "./AddAdvertForm";
 
 export {
   Map,
@@ -12,4 +13,5 @@ export {
   Header,
   AddAdvertBtn,
   ModalAddAdvert,
+  AddAdvertForm,
 };
