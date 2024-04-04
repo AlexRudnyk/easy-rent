@@ -40,7 +40,7 @@ const Map = ({ center }: IMapProps) => {
   }, []);
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-full h-full">
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}

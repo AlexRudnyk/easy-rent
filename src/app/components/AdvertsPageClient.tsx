@@ -42,9 +42,9 @@ const AdvertsPageClient = () => {
       </div> */}
       {isLoaded ? (
         <>
-          <div className="flex">
+          <div className="flex pt-[70px] w-screen h-screen">
             <Map center={center} />
-            <div className="w-[400px] h-screen"></div>
+            <div className="w-[400px]"></div>
           </div>
           {isAddAdvertModalOpen && (
             <ModalAddAdvert onClose={handleModalToggle} />
