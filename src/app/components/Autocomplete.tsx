@@ -10,9 +10,14 @@ import useOnclickOutside from "react-cool-onclickoutside";
 interface AutocompleteProps {
   isLoaded: boolean;
   onSelect: (coordinates: { lat: number; lng: number }) => void;
+  setFieldValue: (field: string, value: any) => void;
 }
 
-const Autocomplete = ({ isLoaded, onSelect }: AutocompleteProps) => {
+const Autocomplete = ({
+  isLoaded,
+  onSelect,
+  setFieldValue,
+}: AutocompleteProps) => {
   const {
     ready,
     value,
@@ -47,6 +52,7 @@ const Autocomplete = ({ isLoaded, onSelect }: AutocompleteProps) => {
         const { lat, lng } = getLatLng(results[0]);
         console.log("📍 Coordinates: ", { lat, lng });
         onSelect({ lat, lng });
+        setFieldValue("location", [lat, lng].join(", "));
       });
     };
 

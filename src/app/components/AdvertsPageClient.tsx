@@ -4,6 +4,8 @@ import React, { useCallback, useState } from "react";
 import { useJsApiLoader, Libraries } from "@react-google-maps/api";
 import { Autocomplete, Map, ModalAddAdvert } from ".";
 import { useAppContext } from "../context";
+import AdvertItem from "./AdvertItem";
+import { IAdvert } from "../../../types/IAdvert";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -14,7 +16,7 @@ const defaultCenter = {
 
 const libraries: Libraries | undefined = ["places"];
 
-const AdvertsPageClient = () => {
+const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
   const [center, setCenter] = useState(defaultCenter);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -28,12 +30,12 @@ const AdvertsPageClient = () => {
     setIsAddAdvertModalOpen(!isAddAdvertModalOpen);
   };
 
-  //   const onPlaceSelect = useCallback(
-  //     (coordinates: { lat: number; lng: number }) => {
-  //       setCenter(coordinates);
-  //     },
-  //     []
-  //   );
+  const onPlaceSelect = useCallback(
+    (coordinates: { lat: number; lng: number }) => {
+      setCenter(coordinates);
+    },
+    []
+  );
 
   return (
     <>
@@ -44,10 +46,18 @@ const AdvertsPageClient = () => {
         <>
           <div className="flex pt-[70px] w-screen h-screen">
             <Map center={center} />
-            <div className="w-[400px]"></div>
+            <ul className="w-[400px]">
+              {adverts?.map((advert: IAdvert) => (
+                <AdvertItem key={advert._id} advert={advert} />
+              ))}
+            </ul>
           </div>
           {isAddAdvertModalOpen && (
-            <ModalAddAdvert onClose={handleModalToggle} />
+            <ModalAddAdvert
+              onClose={handleModalToggle}
+              isLoaded={isLoaded}
+              onSelect={onPlaceSelect}
+            />
           )}
         </>
       ) : (

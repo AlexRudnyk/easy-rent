@@ -2,12 +2,19 @@
 
 import React, { useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { AddAdvertForm } from ".";
 
 interface ModalAddAdvertProps {
   onClose: () => void;
+  isLoaded: boolean;
+  onSelect: (coordinates: { lat: number; lng: number }) => void;
 }
 
-const ModalAddAdvert = ({ onClose }: ModalAddAdvertProps) => {
+const ModalAddAdvert = ({
+  onClose,
+  isLoaded,
+  onSelect,
+}: ModalAddAdvertProps) => {
   useEffect(() => {
     const onEscClick = (e: KeyboardEvent) => {
       if (e.code === "Escape") onClose();
@@ -36,6 +43,7 @@ const ModalAddAdvert = ({ onClose }: ModalAddAdvertProps) => {
         >
           <AiOutlineClose />
         </button>
+        <AddAdvertForm isLoaded={isLoaded} onSelect={onSelect} />
         {/* <Formik
           initialValues={initialValues}
           validationSchema={ModalEditGoodSchema()}
