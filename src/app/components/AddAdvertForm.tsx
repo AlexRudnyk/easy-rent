@@ -4,7 +4,7 @@ import React, { ChangeEvent, useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IFormValues } from "../../../types/IFormValues";
 import { formValidationSchema } from "@/helpers/formValidationSchema";
-import { Autocomplete } from ".";
+import { Autocomplete, ImageUpload } from ".";
 
 interface AdvertFormProps {
   isLoaded: boolean;
@@ -23,22 +23,22 @@ const AddAdvertForm = ({ isLoaded, onSelect }: AdvertFormProps) => {
     location: "",
   };
 
-  const handleImageChange = async (
-    e: ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: any) => void
-  ) => {
-    if (!e.currentTarget.files?.length) return;
+  //   const handleImageChange = async (
+  //     e: ChangeEvent<HTMLInputElement>,
+  //     setFieldValue: (field: string, value: any) => void
+  //   ) => {
+  //     if (!e.currentTarget.files?.length) return;
 
-    const file = e.currentTarget.files[0];
-    const imageUrl = URL.createObjectURL(file);
-    setImage(imageUrl);
+  //     const file = e.currentTarget.files[0];
+  //     const imageUrl = URL.createObjectURL(file);
+  //     setImage(imageUrl);
 
-    setFieldValue("image", file);
+  //     setFieldValue("image", imageUrl);
 
-    if (e.target) {
-      e.target.value = "";
-    }
-  };
+  //     if (e.target) {
+  //       e.target.value = "";
+  //     }
+  //   };
 
   const handleOnSubmit = (
     values: IFormValues,
@@ -56,7 +56,8 @@ const AddAdvertForm = ({ isLoaded, onSelect }: AdvertFormProps) => {
     >
       {({ setFieldValue }) => (
         <Form>
-          <div>
+          <ImageUpload setFieldValue={setFieldValue} />
+          {/* <div>
             <input
               type="file"
               name="image"
@@ -69,7 +70,7 @@ const AddAdvertForm = ({ isLoaded, onSelect }: AdvertFormProps) => {
               className=""
             />
             <ErrorMessage name="image" />
-          </div>
+          </div> */}
 
           <div className="">
             <label className="" htmlFor="title">
