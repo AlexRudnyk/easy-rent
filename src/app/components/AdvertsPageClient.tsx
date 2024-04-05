@@ -43,7 +43,7 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
         <>
           <div className="flex pt-[70px] w-screen h-screen">
             <Map center={center} />
-            <ul className="w-[400px]">
+            <ul className="w-[400px] bg-slate-300 p-2 overflow-y-scroll">
               {adverts?.map((advert: IAdvert) => (
                 <AdvertItem key={advert._id} advert={advert} />
               ))}
