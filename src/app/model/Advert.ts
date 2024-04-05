@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const IPosition = {
-  lat: { type: "number", required: true },
-  lng: { type: "number", required: true },
-};
-
 const advertSchema = new Schema(
   {
     image: {
@@ -18,17 +13,17 @@ const advertSchema = new Schema(
       type: "string",
       required: [true, "Please enter a title"],
     },
+    description: {
+      type: "string",
+      required: [true, "Please enter a description"],
+    },
     price: {
       type: "number",
       required: [true, "Please enter a price"],
       default: "за домовленістю",
     },
-    description: {
+    location: {
       type: "string",
-      required: [true, "Please enter a description"],
-    },
-    position: {
-      type: IPosition,
       required: [true, "Please enter position coordinates"],
     },
   },

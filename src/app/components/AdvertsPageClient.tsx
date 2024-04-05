@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { useJsApiLoader, Libraries } from "@react-google-maps/api";
-import { Autocomplete, Map, ModalAddAdvert } from ".";
+import { Map, ModalAddAdvert } from ".";
 import { useAppContext } from "../context";
 import AdvertItem from "./AdvertItem";
 import { IAdvert } from "../../../types/IAdvert";
@@ -39,9 +39,6 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
 
   return (
     <>
-      {/* <div className="flex justify-center">
-        <Autocomplete isLoaded={isLoaded} onSelect={onPlaceSelect} />
-      </div> */}
       {isLoaded ? (
         <>
           <div className="flex pt-[70px] w-screen h-screen">

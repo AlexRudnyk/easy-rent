@@ -1,14 +1,5 @@
 import * as Yup from "yup";
 
-// const validFileExtensions: Record<string, string[]> = {
-//   image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
-// };
-
-// function isValidFileType(fileName: string, fileType: string): boolean {
-//   const fileExtension = fileName.split(".").pop() || "";
-//   return !!fileName && !!validFileExtensions[fileType]?.includes(fileExtension);
-// }
-
 export const formValidationSchema = Yup.object({
   image: Yup.mixed()
     .required("Фото обовʼязкове")

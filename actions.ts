@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import connect from "./db";
 import Advert from "./src/app/model/Advert";
-import { IAdvert } from "./types/IAdvert";
+import { IFormValues } from "./types/IFormValues";
 
 export async function getAllAdverts() {
   try {
@@ -22,19 +22,13 @@ export async function addAdvert({
   image,
   title,
   description,
-  position,
   price,
-}: IAdvert) {
+  location,
+}: IFormValues) {
   try {
     await connect();
 
-    await Advert.create({
-      image,
-      title,
-      position,
-      price,
-      description,
-    });
+    await Advert.create({ image, title, description, price, location });
   } catch (error) {
     console.log(error);
   }

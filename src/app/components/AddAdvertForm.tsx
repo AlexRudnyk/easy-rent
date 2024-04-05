@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IFormValues } from "../../../types/IFormValues";
 import { formValidationSchema } from "@/helpers/formValidationSchema";
 import { Autocomplete, ImageUpload } from ".";
+import { addAdvert } from "../../../actions";
 
 interface AdvertFormProps {
   isLoaded: boolean;
@@ -25,7 +26,7 @@ const AddAdvertForm = ({ isLoaded, onSelect, onClose }: AdvertFormProps) => {
     values: IFormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
-    console.log("VALUES", values);
+    addAdvert(values);
     resetForm();
     onClose();
   };
@@ -79,7 +80,7 @@ const AddAdvertForm = ({ isLoaded, onSelect, onClose }: AdvertFormProps) => {
               style={{
                 "::WebkitInnerSpinButton": { display: "none" },
                 "::WebkitOuterSpinButton": { display: "none" },
-                "-moz-appearance": "textfield",
+                MozAppearance: "textfield",
               }}
               type="number"
               id="price"
