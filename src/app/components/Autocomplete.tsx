@@ -64,7 +64,11 @@ const Autocomplete = ({
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
+        <li
+          key={place_id}
+          onClick={handleSelect(suggestion)}
+          className="cursor-pointer"
+        >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
@@ -81,7 +85,7 @@ const Autocomplete = ({
         value={value}
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Where are you going?"
+        className="border border-gray-300 w-full p-2 rounded-md"
       />
       {status === "OK" && <ul>{renderSuggestions()}</ul>}
     </div>
