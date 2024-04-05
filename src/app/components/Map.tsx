@@ -1,11 +1,17 @@
 "use client";
 
-import React, { useRef } from "react";
-import { GoogleMap } from "@react-google-maps/api";
+import React, { useCallback, useEffect, useRef } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { mapTheme } from "./mapTheme";
+import { IAdvert } from "../../../types/IAdvert";
+import { debounce } from "lodash";
 
 interface IMapProps {
   center: { lat: number; lng: number };
+  adverts: IAdvert[] | undefined;
+  setVisibleMarkers: (a: number[]) => void;
+  selectedPoint: number | null;
+  setSelectedPoint: (n: number | null) => void;
 }
 
 const containerStyle = {
@@ -13,7 +19,13 @@ const containerStyle = {
   height: "100%",
 };
 
-const Map = ({ center }: IMapProps) => {
+const Map = ({
+  center,
+  adverts,
+  setVisibleMarkers,
+  selectedPoint,
+  setSelectedPoint,
+}: IMapProps) => {
   const mapRef = useRef<google.maps.Map | undefined>(undefined);
 
   const defaultOptions = {
@@ -39,6 +51,38 @@ const Map = ({ center }: IMapProps) => {
     mapRef.current = undefined;
   }, []);
 
+  const handleBoundsChanged = useCallback(
+    debounce(() => {
+      if (mapRef.current) {
+        const bounds = mapRef.current.getBounds();
+        if (bounds) {
+          const visibleMarkers = adverts
+            ?.filter((advert) =>
+              bounds.contains(
+                new google.maps.LatLng(
+                  Number(advert.location.split(", ")[0]),
+                  Number(advert.location.split(", ")[1])
+                )
+              )
+            )
+            .map((marker) => marker._id);
+
+          // Filter out undefined values and convert remaining strings to numbers
+          const filteredVisibleMarkers = visibleMarkers
+            ?.filter((marker) => typeof marker === "string")
+            .map((marker) => Number(marker));
+
+          if (filteredVisibleMarkers) setVisibleMarkers(filteredVisibleMarkers);
+        }
+      }
+    }, 300),
+    [mapRef, adverts, setVisibleMarkers]
+  );
+
+  useEffect(() => {
+    handleBoundsChanged();
+  }, [handleBoundsChanged]);
+
   return (
     <div className="w-full h-full">
       <GoogleMap
@@ -47,10 +91,23 @@ const Map = ({ center }: IMapProps) => {
         zoom={10}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        onBoundsChanged={handleBoundsChanged}
         options={defaultOptions}
       >
-        {/* Child components, such as markers, info windows, etc. */}
-        <></>
+        {adverts?.map(({ _id, location }) => (
+          <Marker
+            key={_id}
+            position={{
+              lat: Number(location.split(", ")[0]),
+              lng: Number(location.split(", ")[1]),
+            }}
+            // icon={{
+            //   url: selectedPoint === Number(_id) ? selectedMarker : marker,
+            // }}
+            zIndex={1000}
+            // onClick={() => setSelectedPoint(_id)}
+          />
+        ))}
       </GoogleMap>
     </div>
   );

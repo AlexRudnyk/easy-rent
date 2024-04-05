@@ -18,6 +18,9 @@ const libraries: Libraries | undefined = ["places"];
 
 const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
   const [center, setCenter] = useState(defaultCenter);
+  const [visibleMarkers, setVisibleMarkers] = useState<number[]>([0]);
+  const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY as string,
@@ -42,7 +45,13 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
       {isLoaded ? (
         <>
           <div className="flex pt-[70px] w-screen h-screen">
-            <Map center={center} />
+            <Map
+              center={center}
+              adverts={adverts}
+              setVisibleMarkers={setVisibleMarkers}
+              selectedPoint={selectedPoint}
+              setSelectedPoint={setSelectedPoint}
+            />
             <ul className="w-[400px] bg-slate-300 p-2 overflow-y-scroll">
               {adverts?.map((advert: IAdvert) => (
                 <AdvertItem key={advert._id} advert={advert} />
