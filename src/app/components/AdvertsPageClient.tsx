@@ -19,7 +19,9 @@ const libraries: Libraries | undefined = ["places"];
 const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
   const [center, setCenter] = useState(defaultCenter);
   const [visibleMarkers, setVisibleMarkers] = useState<number[]>([0]);
-  const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
+  const [selectedPoint, setSelectedPoint] = useState<string | undefined>(
+    undefined
+  );
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -54,7 +56,12 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
             />
             <ul className="w-[400px] bg-slate-300 p-2 overflow-y-scroll">
               {adverts?.map((advert: IAdvert) => (
-                <AdvertItem key={advert._id} advert={advert} />
+                <AdvertItem
+                  key={advert._id}
+                  advert={advert}
+                  selectedPoint={selectedPoint}
+                  setSelectedPoint={setSelectedPoint}
+                />
               ))}
             </ul>
           </div>

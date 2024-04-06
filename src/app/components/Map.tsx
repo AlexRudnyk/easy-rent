@@ -10,8 +10,8 @@ interface IMapProps {
   center: { lat: number; lng: number };
   adverts: IAdvert[] | undefined;
   setVisibleMarkers: (a: number[]) => void;
-  selectedPoint: number | null;
-  setSelectedPoint: (n: number | null) => void;
+  selectedPoint: string | undefined;
+  setSelectedPoint: (_id: string | undefined) => void;
 }
 
 const containerStyle = {
@@ -101,11 +101,14 @@ const Map = ({
               lat: Number(location.split(", ")[0]),
               lng: Number(location.split(", ")[1]),
             }}
-            // icon={{
-            //   url: selectedPoint === Number(_id) ? selectedMarker : marker,
-            // }}
+            icon={{
+              url:
+                selectedPoint === _id
+                  ? "/selected-location.svg"
+                  : "/location.svg",
+            }}
             zIndex={1000}
-            // onClick={() => setSelectedPoint(_id)}
+            onClick={() => setSelectedPoint(_id)}
           />
         ))}
       </GoogleMap>

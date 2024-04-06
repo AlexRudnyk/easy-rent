@@ -4,11 +4,20 @@ import { CldImage } from "next-cloudinary";
 
 interface AdvertItemProps {
   advert: IAdvert;
+  selectedPoint: string | undefined;
+  setSelectedPoint: (_id: string | undefined) => void;
 }
 
-const AdvertItem = ({ advert }: AdvertItemProps) => {
+const AdvertItem = ({
+  advert,
+  selectedPoint,
+  setSelectedPoint,
+}: AdvertItemProps) => {
   return (
-    <li className="p-2 pb-4 bg-white mb-4 last:mb-0 rounded-md relative cursor-pointer">
+    <li
+      className="p-2 pb-4 bg-white mb-4 last:mb-0 rounded-md relative cursor-pointer"
+      onClick={() => setSelectedPoint(advert._id)}
+    >
       <CldImage
         src={advert.image}
         alt="advertisement photo"
