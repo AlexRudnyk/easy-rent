@@ -9,7 +9,7 @@ import { debounce } from "lodash";
 interface IMapProps {
   center: { lat: number; lng: number };
   adverts: IAdvert[] | undefined;
-  setVisibleMarkers: (a: number[]) => void;
+  setVisibleMarkers: (n: (string | undefined)[] | undefined) => void;
   selectedPoint: string | undefined;
   setSelectedPoint: (_id: string | undefined) => void;
 }
@@ -66,13 +66,14 @@ const Map = ({
               )
             )
             .map((marker) => marker._id);
+          setVisibleMarkers(visibleMarkers);
 
-          // Filter out undefined values and convert remaining strings to numbers
-          const filteredVisibleMarkers = visibleMarkers
-            ?.filter((marker) => typeof marker === "string")
-            .map((marker) => Number(marker));
+          // // Filter out undefined values and convert remaining strings to numbers
+          // const filteredVisibleMarkers = visibleMarkers
+          //   ?.filter((marker) => typeof marker === "string")
+          //   .map((marker) => Number(marker));
 
-          if (filteredVisibleMarkers) setVisibleMarkers(filteredVisibleMarkers);
+          // if (filteredVisibleMarkers) setVisibleMarkers(filteredVisibleMarkers);
         }
       }
     }, 300),

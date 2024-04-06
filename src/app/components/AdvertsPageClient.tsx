@@ -18,7 +18,9 @@ const libraries: Libraries | undefined = ["places"];
 
 const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
   const [center, setCenter] = useState(defaultCenter);
-  const [visibleMarkers, setVisibleMarkers] = useState<number[]>([0]);
+  const [visibleMarkers, setVisibleMarkers] = useState<
+    (string | undefined)[] | undefined
+  >([]);
   const [selectedPoint, setSelectedPoint] = useState<string | undefined>(
     undefined
   );
@@ -42,6 +44,10 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
     []
   );
 
+  const sortedAdverts = selectedPoint
+    ? adverts?.filter(({ _id }) => _id === selectedPoint)
+    : adverts?.filter(({ _id }) => visibleMarkers?.includes(_id));
+
   return (
     <>
       {isLoaded ? (
@@ -54,16 +60,29 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
               selectedPoint={selectedPoint}
               setSelectedPoint={setSelectedPoint}
             />
-            <ul className="w-[400px] bg-slate-300 p-2 overflow-y-scroll">
-              {adverts?.map((advert: IAdvert) => (
-                <AdvertItem
-                  key={advert._id}
-                  advert={advert}
-                  selectedPoint={selectedPoint}
-                  setSelectedPoint={setSelectedPoint}
-                />
-              ))}
-            </ul>
+            <div className="w-[400px] bg-slate-300 p-2 overflow-y-scroll">
+              {selectedPoint && (
+                <div className="">
+                  <button
+                    className=""
+                    onClick={() => setSelectedPoint(undefined)}
+                  >
+                    Скасувати
+                  </button>
+                  <p className="">До Вашої уваги обраний об'єкт</p>
+                </div>
+              )}
+              <ul className="">
+                {sortedAdverts?.map((advert: IAdvert) => (
+                  <AdvertItem
+                    key={advert._id}
+                    advert={advert}
+                    selectedPoint={selectedPoint}
+                    setSelectedPoint={setSelectedPoint}
+                  />
+                ))}
+              </ul>
+            </div>
           </div>
           {isAddAdvertModalOpen && (
             <ModalAddAdvert
