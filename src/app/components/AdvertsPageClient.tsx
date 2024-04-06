@@ -69,12 +69,14 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
                   >
                     Скасувати
                   </button>
-                  <p className="text-lg">До Вашої уваги обраний об'єкт</p>
+                  <p className="text-lg text-center">
+                    До Вашої уваги обраний об'єкт
+                  </p>
                 </div>
               ) : (
                 sortedAdverts?.length !== 0 && (
                   <div>
-                    <p className="pt-4 mb-6 text-lg">
+                    <p className="pt-4 mb-6 text-lg text-center">
                       На обраній ділянці карти знайдено оголошень:{" "}
                       {sortedAdverts?.length}
                     </p>
@@ -83,26 +85,20 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
               )}
               {adverts?.length === 0 ? (
                 <div className="flex items-center justify-center h-full">
-                  <p className="text-lg">
+                  <p className="text-lg text-center">
                     Нажаль, жодного оголошення ще не додано. Скористайтесь своєю
                     можливістю
                   </p>
                 </div>
               ) : sortedAdverts?.length === 0 ? (
                 <div className="flex items-center justify-center h-full">
-                  <p className="text-lg">
+                  <p className="text-lg text-center">
                     На видиму ділянку карти не потряпляють оголошення.
                     Спробуйте, будь ласка, змінити масштаб
                   </p>
                 </div>
               ) : (
                 <>
-                  {/* <div>
-                    <p className="pt-4 mb-6 text-lg">
-                      На обраній ділянці карти знайдено оголошень:{" "}
-                      {sortedAdverts?.length}
-                    </p>
-                  </div> */}
                   <ul className="">
                     {sortedAdverts?.map((advert: IAdvert) => (
                       <AdvertItem
