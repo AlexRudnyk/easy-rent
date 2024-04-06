@@ -72,16 +72,40 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
                   <p className="">До Вашої уваги обраний об'єкт</p>
                 </div>
               )}
-              <ul className="">
-                {sortedAdverts?.map((advert: IAdvert) => (
-                  <AdvertItem
-                    key={advert._id}
-                    advert={advert}
-                    selectedPoint={selectedPoint}
-                    setSelectedPoint={setSelectedPoint}
-                  />
-                ))}
-              </ul>
+              {adverts?.length === 0 ? (
+                <div>
+                  <p>
+                    Нажаль, жодного оголошення ще не додано. Скористайтесь своєю
+                    можливістю
+                  </p>
+                </div>
+              ) : sortedAdverts?.length === 0 ? (
+                <div>
+                  <p>
+                    На видиму ділянку карти не потряпляють оголошення.
+                    Спробуйте, будь ласка, змінити масштаб
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <p>
+                      На обраній ділянці карти знайдено оголошень:{" "}
+                      {sortedAdverts?.length}
+                    </p>
+                  </div>
+                  <ul className="">
+                    {sortedAdverts?.map((advert: IAdvert) => (
+                      <AdvertItem
+                        key={advert._id}
+                        advert={advert}
+                        selectedPoint={selectedPoint}
+                        setSelectedPoint={setSelectedPoint}
+                      />
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
           </div>
           {isAddAdvertModalOpen && (
