@@ -60,40 +60,49 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
               selectedPoint={selectedPoint}
               setSelectedPoint={setSelectedPoint}
             />
-            <div className="w-[400px] bg-slate-300 p-2 overflow-y-scroll">
-              {selectedPoint && (
-                <div className="">
+            <div className="w-[400px] bg-gray-300 p-2 overflow-y-scroll">
+              {selectedPoint ? (
+                <div className="flex flex-col py-4">
                   <button
-                    className=""
+                    className="p-2 w-[110px] mb-[20px] self-center border-none hover:shadow-[7px_15px_20px_0px_rgba(0,0,0,0.6)] hover:bg-yellow-400 focus:shadow-[7px_15px_20px_0px_rgba(0,0,0,0.6)] transition ease-in-out focus:bg-yellow-400 bg-yellow-300 rounded-md"
                     onClick={() => setSelectedPoint(undefined)}
                   >
                     Скасувати
                   </button>
-                  <p className="">До Вашої уваги обраний об'єкт</p>
+                  <p className="text-lg">До Вашої уваги обраний об'єкт</p>
                 </div>
+              ) : (
+                sortedAdverts?.length !== 0 && (
+                  <div>
+                    <p className="pt-4 mb-6 text-lg">
+                      На обраній ділянці карти знайдено оголошень:{" "}
+                      {sortedAdverts?.length}
+                    </p>
+                  </div>
+                )
               )}
               {adverts?.length === 0 ? (
-                <div>
-                  <p>
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-lg">
                     Нажаль, жодного оголошення ще не додано. Скористайтесь своєю
                     можливістю
                   </p>
                 </div>
               ) : sortedAdverts?.length === 0 ? (
-                <div>
-                  <p>
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-lg">
                     На видиму ділянку карти не потряпляють оголошення.
                     Спробуйте, будь ласка, змінити масштаб
                   </p>
                 </div>
               ) : (
                 <>
-                  <div>
-                    <p>
+                  {/* <div>
+                    <p className="pt-4 mb-6 text-lg">
                       На обраній ділянці карти знайдено оголошень:{" "}
                       {sortedAdverts?.length}
                     </p>
-                  </div>
+                  </div> */}
                   <ul className="">
                     {sortedAdverts?.map((advert: IAdvert) => (
                       <AdvertItem

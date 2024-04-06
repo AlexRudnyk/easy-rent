@@ -105,7 +105,7 @@ const AddAdvertForm = ({ isLoaded, onSelect, onClose }: AdvertFormProps) => {
             </div>
           </div>
           <button
-            className="flex justify-center items-center py-3 px-6 outline-none transition ease-in-out hover:scale-[105%] bg-lime-300 rounded-lg"
+            className="flex justify-center items-center py-3 px-6 outline-none hover:shadow-[7px_15px_20px_0px_rgba(0,0,0,0.6)] hover:bg-yellow-400 focus:shadow-[7px_15px_20px_0px_rgba(0,0,0,0.6)] transition ease-in-out focus:bg-yellow-400 bg-yellow-300 rounded-lg"
             type="submit"
           >
             Подати оголошення
