@@ -67,13 +67,6 @@ const Map = ({
             )
             .map((marker) => marker._id);
           setVisibleMarkers(visibleMarkers);
-
-          // // Filter out undefined values and convert remaining strings to numbers
-          // const filteredVisibleMarkers = visibleMarkers
-          //   ?.filter((marker) => typeof marker === "string")
-          //   .map((marker) => Number(marker));
-
-          // if (filteredVisibleMarkers) setVisibleMarkers(filteredVisibleMarkers);
         }
       }
     }, 300),

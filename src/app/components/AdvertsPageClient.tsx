@@ -123,7 +123,7 @@ const AdvertsPageClient = ({ adverts }: { adverts: IAdvert[] | undefined }) => {
         </>
       ) : (
         <div className="w-screen h-screen flex items-center justify-center">
-          <h2>Loading...</h2>
+          <h2 className="font-bold text-4xl">Loading...</h2>
         </div>
       )}
     </>
