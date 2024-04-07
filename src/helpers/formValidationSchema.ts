@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 export const formValidationSchema = Yup.object({
   image: Yup.mixed()
-    .required("Фото обовʼязкове. Натисніть 'Вибрати' фото і 'Завантажити'")
+    .required("Фото обовʼязкове. Натисніть 'Вибрати фото' і 'Завантажити'")
     .test("is-file", "Фотографія обовʼязкова", (value) => {
       return !!value;
     }),
