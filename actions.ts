@@ -34,3 +34,14 @@ export async function addAdvert({
   }
   revalidatePath("/");
 }
+
+export async function deleteAdvert(id: string) {
+  try {
+    await connect();
+
+    await Advert.findByIdAndDelete(id);
+  } catch (error) {
+    console.log(error);
+  }
+  revalidatePath("/");
+}
