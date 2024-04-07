@@ -39,7 +39,12 @@ const AddAdvertForm = ({ isLoaded, onSelect, onClose }: AdvertFormProps) => {
     >
       {({ setFieldValue }) => (
         <Form className="w-full flex flex-col">
-          <ImageUpload setFieldValue={setFieldValue} />
+          <div>
+            <ImageUpload setFieldValue={setFieldValue} />
+            <div className="text-red-600 text-sm">
+              <ErrorMessage name="image" />
+            </div>
+          </div>
 
           <div className="mb-[8px]">
             <label className="block mb-[5px]" htmlFor="title">

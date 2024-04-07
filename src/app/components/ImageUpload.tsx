@@ -75,6 +75,7 @@ const ImageUpload = ({ setFieldValue }: FormikProps) => {
           <input
             hidden
             id="hidden-input"
+            name="image"
             type="file"
             className="hidden"
             onChange={handleImageChange}
@@ -86,7 +87,7 @@ const ImageUpload = ({ setFieldValue }: FormikProps) => {
               className="flex cursor-pointer justify-center mb-[30px] py-5 border-b-2 border-gray-300"
             >
               <div className="flex justify-center items-center py-3 px-6 outline-none hover:shadow-[7px_15px_20px_0px_rgba(0,0,0,0.6)] hover:bg-yellow-400 focus:shadow-[7px_15px_20px_0px_rgba(0,0,0,0.6)] transition ease-in-out focus:bg-yellow-400 bg-yellow-300 rounded-md">
-                Вибрати файл
+                Вибрати фото
               </div>
             </label>
           )}
