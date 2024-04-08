@@ -1,7 +1,9 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { IAdvert } from "../../../types/IAdvert";
 import { CldImage } from "next-cloudinary";
-import { deleteAdvert } from "../../../actions";
+import ModalDeleteAdvert from "./ModalDeleteAdvert";
 
 interface AdvertItemProps {
   advert: IAdvert;
@@ -10,11 +12,15 @@ interface AdvertItemProps {
 }
 
 const AdvertItem = ({ advert, setSelectedPoint }: AdvertItemProps) => {
+  const [isDeleteAdvertModalOpen, setIsDeleteAdvertModalOpen] =
+    useState<boolean>(false);
+
+  const handleDeleteAdvertModalToggle = () => {
+    setIsDeleteAdvertModalOpen(!isDeleteAdvertModalOpen);
+  };
+
   return (
-    <li
-      className="p-2 pb-4 bg-white mb-4 last:mb-0 rounded-md relative cursor-pointer"
-      // onClick={() => setSelectedPoint(advert._id)}
-    >
+    <li className="p-2 pb-4 bg-white mb-4 last:mb-0 rounded-md relative cursor-pointer">
       <div onClick={() => setSelectedPoint(advert._id)}>
         <CldImage
           src={advert.image}
@@ -32,12 +38,16 @@ const AdvertItem = ({ advert, setSelectedPoint }: AdvertItemProps) => {
       <button
         type="button"
         className="p-3 border border-gray-300 rounded-md text-gray-500 z-100"
-        onClick={() => {
-          if (advert._id) deleteAdvert(advert._id);
-        }}
+        onClick={handleDeleteAdvertModalToggle}
       >
         Видалити оголошення
       </button>
+      {isDeleteAdvertModalOpen && (
+        <ModalDeleteAdvert
+          advert={advert}
+          onClose={handleDeleteAdvertModalToggle}
+        />
+      )}
     </li>
   );
 };

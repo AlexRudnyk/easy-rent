@@ -8,6 +8,7 @@ import AddAdvertForm from "./AddAdvertForm";
 import AdvertItem from "./AdvertItem";
 import ImageUpload from "./ImageUpload";
 import Logo from "./Logo";
+import ModalDeleteAdvert from "./ModalDeleteAdvert";
 
 export {
   Map,
@@ -20,4 +21,5 @@ export {
   AdvertItem,
   ImageUpload,
   Logo,
+  ModalDeleteAdvert,
 };
